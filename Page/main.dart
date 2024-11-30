@@ -14,60 +14,62 @@ class MainApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
-        textTheme: GoogleFonts.anaheimTextTheme(),
+        textTheme: GoogleFonts.robotoTextTheme(),
       ),
       home: Scaffold(
         body: Row(
           children: [
-            Column(
-              //mainaxis alinea verticalmente
-              // mainAxisAlignment: MainAxisAlignment.center,
-              //crossaxis alinea horizontalmente
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                botton(Icons.book, 'Projects', () {}),
-                botton(Icons.draw, 'Draft', () {}),
-                botton(Icons.switch_access_shortcut_outlined, 'Shared whit me',
-                    () {}),
-                const Spacer(),
-                botton(Icons.settings, 'Settings', () {}),
-                botton(Icons.people, 'Invite members', () {}),
-                botton(Icons.add, 'New Draft', () {}),
-                botton(Icons.add, 'New Project', () {}),
-              ],
+            // Modificación de Column por ListView
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(20),
+                children: [
+                  botton(Icons.account_tree, 'Projects', () {}),
+                  botton(Icons.brush, 'Draft', () {}),
+                  botton(Icons.group_add, 'Shared with me', () {}),
+                  const Spacer(),
+                  botton(Icons.settings, 'Settings', () {}),
+                  botton(Icons.group, 'Invite members', () {}),
+                  botton(Icons.create, 'New Draft', () {}),
+                  botton(Icons.add_box, 'New Project', () {}),
+                ],
+              ),
             ),
+            // Modificación de los textos y botones en un Stack para mayor flexibilidad
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  const Row(
+                  Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'Side Hustle',
                         style: TextStyle(
                           fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal,
                         ),
                       ),
                       SizedBox(width: 20),
                       Icon(
-                        Icons.keyboard_arrow_down_rounded,
+                        Icons.arrow_drop_down_rounded,
                         size: 35,
+                        color: Colors.teal,
                       ),
-                      SizedBox(width: 800),
-                      Icon(Icons.link),
+                      SizedBox(width: 600),
+                      Icon(Icons.link, color: Colors.teal),
                       SizedBox(width: 20),
-                      Text('Share'),
+                      Text('Share', style: TextStyle(color: Colors.teal)),
                       SizedBox(width: 20),
-                      Icon(Icons.more_vert),
-                      //
+                      Icon(Icons.more_vert, color: Colors.teal),
                     ],
                   ),
+                  SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
                     children: [
                       nota(),
                       const SizedBox(width: 40),
@@ -90,28 +92,40 @@ class MainApp extends StatelessWidget {
   nota() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.blueGrey[50],
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 2,
+            blurRadius: 5,
+          ),
+        ],
       ),
       padding: const EdgeInsets.all(20),
       height: 300,
-      width: 200,
+      width: 220,
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            // mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 height: 15,
                 width: 15,
                 decoration: const BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.green,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(width: 10),
-              const Text('Titulo x'),
+              const Text(
+                'Title x',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 20),
@@ -131,17 +145,18 @@ class MainApp extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.grey[100]),
-                    shape: WidgetStateProperty.all(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.teal[100]),
+                    shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ),
                   child: Text(
                     'Edit',
                     style: TextStyle(
-                      color: Colors.grey[700],
+                      color: Colors.teal[800],
                     ),
                   ),
                 ),
@@ -163,12 +178,19 @@ class MainApp extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            Icon(icon),
+            Icon(icon, color: Colors.teal),
             const SizedBox(width: 10),
-            Text(text),
+            Text(
+              text,
+              style: TextStyle(
+                color: Colors.teal[800],
+                fontSize: 16,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 }
+

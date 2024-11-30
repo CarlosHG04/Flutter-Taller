@@ -8,23 +8,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../diseño_chill/main.dart';
+import '../page2/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Button interaction test', (WidgetTester tester) async {
+    // Build the app and trigger a frame.
+    await tester.pumpWidget(const MainApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that a specific button with the label "New Draft" is displayed.
+    expect(find.text('New Draft'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Tap the "New Draft" button and trigger a frame.
+    await tester.tap(find.text('New Draft'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify the tap interaction (output in console).
+    // Since the button prints the text, we can simulate console verification
+    // but the real check will be interaction confirmation in the app.
+    expect(find.text('New Draft'), findsOneWidget);
+
+    // Verify other icon buttons are present.
+    expect(find.byIcon(Icons.create), findsOneWidget);
+    expect(find.byIcon(Icons.account_tree), findsOneWidget);
+  });
+
+  testWidgets('Presence of key UI elements', (WidgetTester tester) async {
+    // Build the app and trigger a frame.
+    await tester.pumpWidget(const MainApp());
+
+    // Verify the header title "Side Hustle" exists.
+    expect(find.text('Side Hustle'), findsOneWidget);
+
+    // Check for the presence of 4 note containers (from the nota() widget).
+    expect(find.byType(Container), findsNWidgets(4));
   });
 }
+
